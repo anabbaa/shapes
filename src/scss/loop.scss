@@ -1,0 +1,71 @@
+
+$items-count: 30; // corresponds to the number of divs in your HTML
+
+// Define animation
+@keyframes move {
+  0% {
+    top: 100%;
+  }
+
+  100% {
+    top:  50%;
+  }
+}
+
+// Mixin to use animation
+@mixin add-move-animation($duration) {
+  animation-name: move;
+  animation-duration: $duration;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in;
+}
+
+body {
+  background-color: black;
+  margin: 0;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat($items-count, 1fr);
+  grid-template-rows: 1fr;
+  height: 100vh;
+}
+
+
+
+
+@for $i from 1 through $items-count {
+    .item:nth-child(#{$i}) {
+      background: linear-gradient(
+        to right left,
+        lighten(green, random(40)),
+        rgba(darken(green, random(40)), 1)
+      );
+
+      height: random(10) + 2 + vh;
+      
+      transform-origin: 0 0;
+      border-radius:  ((random(100) + 10 + px));
+      
+      @if (($i % 2) != 0) {
+        border-radius: ((random(100) + 10 + px));
+        background: linear-gradient(
+          to top left,
+          lighten(green, random(40)),
+          rgba(darken(green, random(10)), 1)
+        );
+      }
+      
+      @include add-move-animation(random(18) + 1 + s);
+    }
+  }
+  
+  .item:nth-child(even) {
+    align-self: end;
+    transform-origin: 0 100%;
+  }
+.item{
+position: relative;
+}
