@@ -39,9 +39,9 @@ body {
 @for $i from 1 through $items-count {
     .item:nth-child(#{$i}) {
       background: linear-gradient(
-        to right left,
-        lighten(green, random(40)),
-        rgba(darken(green, random(40)), 1)
+        to top left,
+        lighten(red, random(40)),
+        rgba(darken(red, random(40)), 1)
       );
 
       height: random(10) + 2 + vh;
